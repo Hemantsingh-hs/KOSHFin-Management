@@ -1,0 +1,10 @@
+.heroSubText{
+    width: 65%;
+}
+
+@media (max-width:579px){
+    .heroSubText{
+        width: 100%;
+    }
+}
+
