@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {MapPin,Navigation,Search} from "lucide-react"
+import {MapPin,Navigation,Search,Locate} from "lucide-react"
 
 const PropertiesSearch = () => {
 
@@ -23,8 +23,8 @@ const PropertiesSearch = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl overflow-hidden rounded-[28px] border-slate-200 bg-white shadow-sm">
-<div className="grid grid-cols-4 border-b border-slate-200">
+    <div className="w-full max-w-2xl overflow-hidden rounded-[28px] border-slate-500 bg-white shadow-sm border mb-10">
+<div className="grid grid-cols-4 border-b border-slate-300">
       {tabs.map((tab)=>(
         <button key={tab} onClick={()=>setActiveTab(tab)}
         className={`relative py-4 text-base font-semibold transition
@@ -49,7 +49,10 @@ const PropertiesSearch = () => {
           <MapPin size={22} className="shrink text-indigo-500"/>
          <input className="w-3/4 rounded-3xl border-0 text-center focus:outline-none focus:border-blue-500 font-serif text-md text-gray-800 " type="text" value={location}  onChange={(e)=>setLocation(e.target.value)}/>
         </div>
-
+        <button  className="flex min-h-[56x] items-center justify-center gap-2 rounded-2xl  px-4 text-base font-semibold text-slate-600 shadow-md transition hover:bg-indigo-100 hover:text-indigo-500">
+          <Locate size={15}/>
+          <span>Near me</span>
+        </button>
         <button onClick={handleSearch} className="flex min-h-[56x] items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-7 text-base font-semibold text-white shadow-md transition hover:bg-indigo-700">
           <Search size={20}/>
           <span>Search</span>
@@ -57,14 +60,13 @@ const PropertiesSearch = () => {
      </div>
 
      <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-sm text-slate-400">
+          <span className="mr-1 text-sm text-slate-500">
             Popular:
           </span>
 
           {popularLocations.map((place)=>(
             <button key={place} onClick={()=>setLocation(place)}
-            className="rounded-full border-slate-200 px-3 py-1.5 text-sm text-shadow-amber-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600
-            font-thin">{place}</button>
+            className="rounded-full border-slate-200 px-3 py-1.5 text-sm text-shadow-amber-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 border-2 border-t-indigo-500 border-b-indigo-500">{place}</button>
           ))}
      </div>
 

@@ -3,7 +3,7 @@ import styles from "./Hero.module.css";
 const Hero = () => {
   return (
     <div>
-       <div className='w-full md:w-1/2'>
+       <div className='w-full md:w-1/2 tracking-[0.07em]'>
 
         <h2 className='flex font-bold text-2xl sm:text-3xl md:text-5xl pt-7'>Manage Your Money. </h2>
         <h2 className='flex font-bold text-2xl sm:text-3xl md:text-5xl text-indigo-600 pb-5'>Find Your Place</h2>
