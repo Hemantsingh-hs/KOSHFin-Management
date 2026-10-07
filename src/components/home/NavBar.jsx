@@ -33,7 +33,7 @@ const NavBar = () => {
 
      <div className='flex items-center gap-5'>
 
-        <Link to="/signin" className='text-slate-600 font-medium hover:text-indigo-600 transition hidden sm:block'> Sign in</Link>
+        <Link to="/login" className='text-slate-600 font-medium hover:text-indigo-600 transition hidden sm:block'> Sign in</Link>
 
         <Link to="/register"  className='bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition shadow-md h-10 flex justify-center items-center gap-1'> <span>Get Started</span>  <ArrowRight className='w-4'/>
          </Link>

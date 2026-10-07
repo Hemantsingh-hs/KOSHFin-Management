@@ -1,5 +1,5 @@
 import { Dot, Heart, Star,MapPin } from 'lucide-react'
-
+import { Link } from 'react-router-dom'
 
 const PropertyCard = ({property}) => {
   return (
