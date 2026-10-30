@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Reviews = () => {
     const rating=[
      {
-        value:"48+",
+        value:"48,000+",
         label:"Happy Users",
         
     },
@@ -93,7 +93,7 @@ const UserFeedBack=[
   
 ];
   return (
-    <div className='justify-center '>
+    <div id="reviews" className='justify-center pt-8'>
         <div className='text-center font-bold px-2'>
 
          <p className='text-indigo-700 mb-3'>LOVED BY THOUSANDS</p>

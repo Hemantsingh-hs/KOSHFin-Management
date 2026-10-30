@@ -1,23 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  User,
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  ArrowRight,
-} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { LayoutGrid, BarChart3, Building2, Bot, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { useApp } from "../context/AppContext";
 
 const Registration = () => {
+  const navigate = useNavigate();
+  const { setUser } = useApp();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    firstName: "Arjun",
+    lastName: "Rao",
+    email: "arjun@example.com",
     password: "",
-    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -29,186 +23,185 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    console.log("Owner Registration:", formData);
-
-    
+    setUser((prev) => ({
+      ...prev,
+      name: `${formData.firstName} ${formData.lastName}`,
+      displayName: formData.firstName,
+      email: formData.email,
+      initials: `${formData.firstName[0]}${formData.lastName[0] || ""}`,
+    }));
+    navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-10">
-      <div className="mx-auto flex min-h-[85vh] max-w-6xl items-center justify-center">
-
-        {/* Register Card */}
-        <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
-
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#F8FAFC]">
+      {/* Left Branding Side (Matches Figma Navy Panel) */}
+      <div className="w-full md:w-[45%] lg:w-[42%] bg-[#1E1B4B] text-white p-8 md:p-14 lg:p-16 flex flex-col justify-between shrink-0">
+        <div>
           {/* Logo */}
-          <div className="mb-7 text-center">
-            <Link
-              to="/"
-              className="text-3xl font-extrabold text-indigo-600"
-            >
-              KOSHFin
-            </Link>
-
-            <p className="mt-2 text-sm text-slate-500">
-              Unified Property & Financial Management
-            </p>
-          </div>
+          <Link to="/" className="inline-flex items-center space-x-3 mb-16">
+            <div className="w-10 h-10 rounded-xl bg-[#5243C2] flex items-center justify-center text-white shadow-md">
+              <LayoutGrid className="w-5 h-5 fill-white" />
+            </div>
+            <span className="text-2xl font-bold tracking-tight text-white">FinTracker</span>
+          </Link>
 
           {/* Heading */}
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-slate-900">
-              Create Owner Account
-            </h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white mb-6">
+            Take control of your finances.
+          </h1>
+          <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-12">
+            Track income, expenses, budgets, and property rent—all in one intelligent platform.
+          </p>
 
-            <p className="mt-1 text-sm text-slate-500">
-              Register to manage your properties and finances.
+          {/* Feature Highlights */}
+          <div className="space-y-6">
+            <div className="flex items-start space-x-4">
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-indigo-300">
+                <BarChart3 className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-white">Smart Analytics</h4>
+                <p className="text-xs text-slate-300 mt-0.5">Visual insights into your spending patterns</p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-amber-300">
+                <Building2 className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-white">Property Management</h4>
+                <p className="text-xs text-slate-300 mt-0.5">Manage PG rooms, tenants, and rent collection</p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-purple-300">
+                <Bot className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold text-white">AI Assistant</h4>
+                <p className="text-xs text-slate-300 mt-0.5">Personalized financial advice powered by AI</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-8 mt-8 border-t border-white/10 text-xs text-slate-400">
+          © {new Date().getFullYear()} KOSH FinTracker. All rights reserved.
+        </div>
+      </div>
+
+      {/* Right Form Side */}
+      <div className="flex-1 flex items-center justify-center p-6 md:p-12 lg:p-16">
+        <div className="w-full max-w-md">
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Create account
+            </h2>
+            <p className="text-sm text-slate-500 mt-2">
+              Get started with FinTracker for free.
             </p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-
-            {/* Owner Name */}
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-slate-700">
-                Owner Name
-              </label>
-
-              <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-indigo-500 focus-within:bg-white">
-                <User size={18} className="mr-3 text-slate-400" />
-
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* First Name & Last Name (Side by side) */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                  FIRST NAME
+                </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleChange}
-                  placeholder="Enter your name"
+                  placeholder="Arjun"
                   required
-                  className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                  className="w-full px-4 py-3.5 bg-white text-sm text-slate-900 rounded-xl border border-slate-200 focus:border-[#5243C2] focus:ring-2 focus:ring-[#5243C2]/20 focus:outline-none transition placeholder:text-slate-400 shadow-sm"
                 />
               </div>
-            </div>
-
-         
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-slate-700">
-                Email Address
-              </label>
-
-              <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-indigo-500 focus-within:bg-white">
-                <Mail size={18} className="mr-3 text-slate-400" />
-
+              <div>
+                <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                  LAST NAME
+                </label>
                 <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
                   onChange={handleChange}
-                  placeholder="owner@example.com"
+                  placeholder="Rao"
                   required
-                  className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                  className="w-full px-4 py-3.5 bg-white text-sm text-slate-900 rounded-xl border border-slate-200 focus:border-[#5243C2] focus:ring-2 focus:ring-[#5243C2]/20 focus:outline-none transition placeholder:text-slate-400 shadow-sm"
                 />
               </div>
             </div>
 
+            {/* Email Address */}
             <div>
-              <label className="mb-2 block text-sm font-semibold text-slate-700">
-                Password
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                EMAIL ADDRESS
               </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="arjun@example.com"
+                required
+                className="w-full px-4 py-3.5 bg-white text-sm text-slate-900 rounded-xl border border-slate-200 focus:border-[#5243C2] focus:ring-2 focus:ring-[#5243C2]/20 focus:outline-none transition placeholder:text-slate-400 shadow-sm"
+              />
+            </div>
 
-              <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-indigo-500 focus-within:bg-white">
-                <Lock size={18} className="mr-3 text-slate-400" />
-
+            {/* Password */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                PASSWORD
+              </label>
+              <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Create a password"
+                  placeholder="Min. 8 characters"
                   required
-                  className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                  minLength={6}
+                  className="w-full px-4 py-3.5 bg-white text-sm text-slate-900 rounded-xl border border-slate-200 focus:border-[#5243C2] focus:ring-2 focus:ring-[#5243C2]/20 focus:outline-none transition placeholder:text-slate-400 shadow-sm"
                 />
-
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="ml-2 text-slate-400 hover:text-indigo-600"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
-                  {showPassword ? (
-                    <EyeOff size={18} />
-                  ) : (
-                    <Eye size={18} />
-                  )}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
 
-        
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-slate-700">
-                Confirm Password
-              </label>
-
-              <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-indigo-500 focus-within:bg-white">
-                <Lock size={18} className="mr-3 text-slate-400" />
-
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="Confirm your password"
-                  required
-                  className="w-full bg-transparent py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
-                />
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
-                  className="ml-2 text-slate-400 hover:text-indigo-600"
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff size={18} />
-                  ) : (
-                    <Eye size={18} />
-                  )}
-                </button>
-              </div>
-            </div>
-
-          
+            {/* Create Account Button */}
             <button
               type="submit"
-              className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:bg-indigo-700"
+              className="w-full py-3.5 px-4 bg-[#5243C2] hover:bg-[#4335a9] text-white text-sm font-semibold rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer mt-6"
             >
-              Create Account
-              <ArrowRight size={18} />
+              <span>Create Account</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
-
           </form>
 
-          {/* Login Link */}
-          <div className="mt-6 border-t border-slate-100 pt-5 text-center">
-            <p className="text-sm text-slate-500">
-              Already have an owner account?
-            </p>
+          <p className="mt-8 text-center text-sm text-slate-500">
+            Already have an account?{" "}
+            <Link to="/login" className="font-semibold text-[#5243C2] hover:underline">
+              Sign in
+            </Link>
+          </p>
 
-            <Link
-              to="/login"
-              className="mt-1 inline-block text-sm font-bold text-indigo-600 hover:text-indigo-700"
-            >
-              Login as Owner
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-xs text-slate-400 hover:text-slate-600">
+              ← Back to KOSH Homepage
             </Link>
           </div>
-
         </div>
       </div>
     </div>

@@ -1,49 +1,71 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, LayoutGrid } from 'lucide-react';
+
 const NavBar = () => {
   return (
-   <nav className='w-full bg-white border-b-2 border-gray-100'>
-     
-     <div className='max-w 7xl mx-auto px-5 h-20 flex items-center item-center justify-between'>
+    <nav className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        {/* Brand Logo (Matches Figma K KOSH) */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-2xl bg-[#5243C2] text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-200 transition-transform group-hover:scale-105">
+            K
+          </div>
+          <span className="text-2xl font-black tracking-tight text-slate-900">
+            KOSH<span className="text-[#5243C2]">Fin</span>
+          </span>
+        </Link>
 
-     {/* logo */}
+        {/* Navigation Anchor Links */}
+        <div className="hidden md:flex items-center gap-8">
+          <a
+            href="#nearby-section"
+            className="text-sm font-semibold text-slate-600 hover:text-[#5243C2] transition"
+          >
+            Discover
+          </a>
+          <a
+            href="#reviews"
+            className="text-sm font-semibold text-slate-600 hover:text-[#5243C2] transition"
+          >
+            Reviews
+          </a>
+          <a
+            href="#how-it-works"
+            className="text-sm font-semibold text-slate-600 hover:text-[#5243C2] transition"
+          >
+            How it works
+          </a>
+        </div>
 
-     <Link to="/" className="flex items-center gap-3">
-       <div className='w-10 aspect-square rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg sm:text-xl shadow-md'>
-        K
+        {/* Right CTA Buttons */}
+        <div className="flex items-center gap-4">
+          <Link
+            to="/login"
+            className="text-sm font-bold text-slate-700 hover:text-[#5243C2] transition hidden sm:block"
+          >
+            Sign in
+          </Link>
 
-       </div>
-       <span className='text-xl sm:text-2xl font-bold text-slate-900'>KOSHFin</span>
+          <Link
+            to="/dashboard"
+            className="text-xs font-bold text-[#5243C2] bg-indigo-50 hover:bg-indigo-100 px-3.5 py-2 rounded-xl transition hidden lg:flex items-center gap-1.5"
+          >
+            <LayoutGrid className="w-3.5 h-3.5" />
+            <span>Dashboard</span>
+          </Link>
 
-     </Link>
+          <Link
+            to="/register"
+            className="bg-[#5243C2] hover:bg-[#4335a9] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md shadow-indigo-200 flex items-center gap-1.5"
+          >
+            <span>Get Started</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-     {/* Navigation  */}
-
-     <div className='hidden md:flex items-center gap-10'>
-
-        <a href='#discover' className='text-slate-500 hover:text-indigo-600 transition'>Discover</a>
-
-         <a href='#reviews' className='text-slate-500 hover:text-indigo-600 transition'>Reviews</a>
-
-        <a href='#how-it-work' className='text-slate-500 hover:text-indigo-600 transition'>How it works</a>
-     </div>
-
-     {/* right button  Sign in */}
-
-     <div className='flex items-center gap-5'>
-
-        <Link to="/login" className='text-slate-600 font-medium hover:text-indigo-600 transition hidden sm:block'> Sign in</Link>
-
-        <Link to="/register"  className='bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition shadow-md h-10 flex justify-center items-center gap-1'> <span>Get Started</span>  <ArrowRight className='w-4'/>
-         </Link>
-     </div>
-     </div>
-
-   </nav>
-
-
-  )
-}
-
-export default NavBar
+export default NavBar;

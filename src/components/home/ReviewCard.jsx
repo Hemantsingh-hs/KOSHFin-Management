@@ -34,7 +34,7 @@ export const ReviewCard = ({ reviewData }) => {
 
       <div className="reviewer-info" style={{ display: 'flex', alignItems: 'center', marginTop: 'auto' }}>
         <img 
-          src={"https://placeholder.com"} 
+          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'User')}&background=5243C2&color=fff`} 
           alt={name} 
           style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover', marginRight: '12px' }}
         />
